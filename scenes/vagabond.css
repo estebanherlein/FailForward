@@ -1,0 +1,173 @@
+.cockpit-vagabond {
+    background: url("../assets/cockpit_vagabond.png") no-repeat center center;
+    background-size: cover;
+}
+
+.sun {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, #ffffff 0%, #d1e0ff 40%, #a2baff 80%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    animation: rapid-pulse 0.5s linear infinite;
+}
+
+.black-hole-effects {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+}
+
+.sun::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(170, 204, 255, 0.4) 30%, transparent 60%);
+    border-radius: 50%;
+    z-index: -1;
+    animation: pulse 4s ease-in-out infinite;
+}
+
+.sun::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    border-radius: 50%;
+    display: none;
+}
+
+@keyframes neutron-star-collapse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        animation-timing-function: ease-in;
+    }
+    40% {
+        transform: translate(-50%, -50%) scale(0.8);
+        background: white;
+        box-shadow: 0 0 80px 40px #aaccff, 0 0 120px 60px #77aaff, inset 0 0 20px #ffffff;
+        animation-timing-function: ease-in;
+    }
+    70% {
+        transform: translate(-50%, -50%) scale(0);
+        background: white;
+        box-shadow: 0 0 80px 40px #aaccff, 0 0 120px 60px #77aaff, inset 0 0 20px #ffffff;
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        background: transparent;
+        box-shadow: none;
+        opacity: 1;
+    }
+}
+
+@keyframes spin-disk {
+    from { transform: rotateX(75deg) rotateZ(0deg); }
+    to { transform: rotateX(75deg) rotateZ(360deg); }
+}
+
+.sun.is-dying {
+    box-shadow: none;
+    animation: neutron-star-collapse 2s forwards;
+}
+
+.sun.is-dying::before {
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: conic-gradient(from 0deg, #77aaff, #a2baff, #ffffff, #a2baff, #77aaff 50%, transparent 70%);
+    opacity: 0;
+    animation: spin-disk 10s linear infinite 1.5s, fade-in-disk 1s ease-in 1.5s forwards;
+}
+
+.sun.is-dying .black-hole-effects {
+    display: block;
+}
+
+.black-hole-effects::before,
+.black-hole-effects::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 2px;
+    height: 200%;
+    background: linear-gradient(to top, transparent, rgba(200, 220, 255, 0.8), transparent);
+    border-radius: 2px;
+    opacity: 0;
+    animation: fire-jet 1.5s ease-out 2s forwards, flicker 0.2s linear infinite 3.5s;
+}
+
+.black-hole-effects::before {
+    transform-origin: center;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.black-hole-effects::after {
+    transform-origin: center;
+    transform: translate(-50%, -50%) rotate(-135deg);
+}
+
+.sun.is-dying::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    background: black;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    animation: fade-in-disk 1s ease-in 1.5s forwards; /* Fade in after collapse */
+}
+
+@keyframes rapid-pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 20px 5px #aaccff, 0 0 40px 10px #77aaff, inset 0 0 10px #ffffff;
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px 10px #aaccff, 0 0 60px 15px #77aaff, inset 0 0 15px #ffffff;
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 20px 5px #aaccff, 0 0 40px 10px #77aaff, inset 0 0 10px #ffffff;
+    }
+}
+
+@keyframes vagabond-hud-failure {
+    0% {
+        transform: scale(1) skew(0);
+        border-radius: 0;
+        filter: none;
+        opacity: 1;
+    }
+    60% {
+        transform: scale(0.5) skew(0);
+        opacity: 0.8;
+        filter: grayscale(0.5) brightness(1.5);
+        border-radius: 50%;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+        filter: grayscale(1) brightness(5) blur(10px);
+        border-radius: 50%;
+    }
+}

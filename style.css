@@ -1,0 +1,244 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: black;
+    overflow: hidden;
+    font-family: 'Share Tech Mono', monospace;
+    color: #00ff99;
+}
+
+.background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at bottom, #000000 0%, #0a0a0a 100%);
+    z-index: 0;
+}
+
+.stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 1;
+}
+
+.collapse-nebula {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 4s ease-in 1.5s;
+}
+
+.collapse-nebula.visible {
+    opacity: 1;
+}
+
+canvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.75;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.75;
+    }
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 1.5s ease-out;
+}
+
+.screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.screen-content {
+    max-width: 600px;
+    padding: 20px;
+}
+
+.screen-content h1 {
+    font-size: 3em;
+    color: #00ff99;
+    text-shadow: 0 0 10px #00ff99;
+    margin-bottom: 20px;
+}
+
+.screen-content p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    color: #aaffdd;
+}
+
+.scene-select-button[disabled] {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.cockpit {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    transition: opacity 1.5s ease-in;
+}
+
+.cockpit.cockpit-vagabond.is-ending {
+    animation: vagabond-hud-failure 3s forwards;
+    transform-origin: 70% 40%;
+}
+
+.cockpit.cockpit-dauntless.is-ending {
+    animation: dauntless-hud-failure 3s forwards;
+}
+
+.game-over {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #ff3c3c;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 6;
+    text-shadow: 0 0 15px #ff0000;
+}
+
+.game-over .final-log {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #00ff99;
+    max-width: 500px;
+}
+
+.ui {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 6;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border: 1px solid #00ff99;
+    max-width: 40vw;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.ui::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ui::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.ui::-webkit-scrollbar-thumb {
+  background-color: #00ff99;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.choice-panel {
+    display: none;
+    margin-top: 10px;
+    border-top: 1px solid #00ff99;
+    padding-top: 10px;
+}
+
+.choice-panel p {
+    margin: 0 0 10px 0;
+}
+
+.choice-panel button {
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.ui button, #startButton, #enterButton, .scene-select-button, #startButtonDauntless {
+    background: transparent;
+    border: 1px solid #00ff99;
+    color: #00ff99;
+    padding: 10px 15px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    text-shadow: 0 0 5px rgba(0, 255, 153, 0.5);
+}
+
+.ui button:hover, #startButton:hover, #enterButton:hover, .scene-select-button:hover:not([disabled]), #startButtonDauntless:hover {
+    background: #00ff99;
+    color: #000;
+    text-shadow: none;
+}
+
+#enterButton, #startButton, #startButtonDauntless {
+    padding: 15px 30px;
+    font-size: 1.1em;
+}
+
+.log {
+    overflow-y: auto;
+    margin-top: 10px;
+}
+
+@keyframes fade-in-disk {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fire-jet {
+    from {
+        height: 0;
+        opacity: 0;
+    }
+    to {
+        height: 800%;
+        opacity: 1;
+    }
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}

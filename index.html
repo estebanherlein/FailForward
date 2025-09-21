@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Space Loop Game</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="scenes/vagabond.css">
+  <link rel="stylesheet" href="scenes/dauntless.css">
+</head>
+<body>
+  <div class="screen" id="titleScreen">
+    <div class="screen-content">
+      <h1>FAIL FORWARD</h1>
+      <p>An interactive sci-fi journey where every failure teaches a new truth. Pilot through impossible star systems, uncover lessons in trust, timing, and surrender. Discover that sometimes the only way forward is through loss.</p>
+      <button id="enterButton">START</button>
+    </div>
+  </div>
+
+  <div class="screen" id="sceneSelectScreen" style="display: none;">
+    <div class="screen-content">
+      <h1>SELECT A SCENE</h1>
+      <button class="scene-select-button" data-scene="1">I. VAGABOND</button>
+      <button class="scene-select-button" data-scene="2" disabled>II. ???</button>
+      <button class="scene-select-button" data-scene="3">III. DAUNTLESS</button>
+      <button class="scene-select-button" disabled>IV. ???</button>
+    </div>
+  </div>
+
+  <div class="screen" id="introScreen" style="display: none;">
+    <div class="screen-content">
+      <h1>VAGABOND - MISSION LOG</h1>
+      <p>Cmdr. Eva Rostova, entering the outer orbit of the white dwarf VX-119. Initial scans indicated minor gravitational irregularities, but nothing critical. As the Vagabond closed in, the star began to destabilize, its collapse accelerated beyond prediction.</p>
+      <button id="startButton">BEGIN SCENE</button>
+    </div>
+  </div>
+
+  <div class="screen" id="introScreenDauntless" style="display: none;">
+    <div class="screen-content">
+      <h1>DAUNTLESS - MISSION LOG</h1>
+      <p>Capt. Anya Sharma, assigned to system VX-119b.</p>
+      <p> Target: a red giant in early collapse, stabilized by a yellow dwarf in close orbit.</p>
+      <p>  Conditions: uncertain, but escape trajectory projected as viable with Atlas augmentation.</p>
+      <p> Objective: attempt traversal using enhanced pilot-AI integration.</p>
+      <button id="startButtonDauntless">BEGIN SCENE</button>
+    </div>
+  </div>
+
+  <div class="background"></div>
+  <canvas class="stars"></canvas>
+  <div id="celestial-container"></div> <!-- Generic container for suns, planets, etc. -->
+  <div class="collapse-nebula" id="collapseNebula"></div>
+  <div class="cockpit" id="cockpit"></div>
+
+  <div class="game-over" id="gameOverScreen">
+    <h1>TRANSMISSION LOST</h1>
+    <p>Vagabond hull breach detected. Ship integrity compromised. Singularity event confirmed.</p>
+    <p class="final-log">[ATLAS]: The commander’s choice ended the mission. Yet each miscalculation refines the path.</p>
+    <p class="final-log">[ATLAS]: Experience archived for future pilots.</p>
+  </div>
+
+  <div class="game-over" id="gameOverScreenDauntless" style="display: none;">
+    <h1>MISSION STATUS: FAILED</h1>
+    <p>  Primary systems disabled. Vessel irrecoverable.</p>
+    <p class="final-log">[ATLAS]: Crew rescued.</p>
+    <p class="final-log">[ATLAS]: Experience archived. Preserved for future training.</p>
+  </div>
+
+  <div class="ui">
+    <div><strong>Timer:</strong> <span id="timer">0</span> sec</div>
+    <div class="log" id="log"></div>
+    <div class="choice-panel" id="choicePanel">
+      <p>Gravitational acceleration has surpassed jump threshold. Propose escape vectors:</p>
+      <button id="atlasChoice">[ATLAS]: Eject jump core. Vector 0.003% port. (17.4% success)</button>
+      <button id="evaChoice">[ROSTOVA]: Manual override. Vector 0.005% port.</button>
+    </div>
+    <div class="choice-panel" id="choicePanelDauntless">
+      <p>IMPACT WARNING. IMMEDIATE ACTION REQUIRED:</p>
+      <button id="dauntlessChoice1">[ATLAS]: Engage counter-burn. (0.4s window)</button>
+      <button id="dauntlessChoice2">[SHARMA]: Manual evasion. (0.4s window)</button>
+    </div>
+  </div>
+  <audio id="engineHum" src="assets/audio/engine_hum.mp3" loop></audio>
+  <script src="script.js" type="module" defer></script>
+</body>
+</html>
